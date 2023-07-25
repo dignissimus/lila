@@ -50,13 +50,19 @@ final class Main(
     pageHit
     Ok.page(html.site.lag())
 
-  def mobile     = Open(serveMobile)
-  def mobileLang = LangPage(routes.Main.mobile)(serveMobile)
+  def mobile         = Open(serveMobile)
+  def mobileDownload = Open(serveMobileDownload)
+  def mobileLang     = LangPage(routes.Main.mobile)(serveMobile)
 
   private def serveMobile(using Context) =
     pageHit
     FoundPage(prismicC getBookmark "mobile-apk"): (doc, resolver) =>
       html.mobile(doc, resolver)
+
+  private def serveMobileDownload(using Context) =
+    pageHit
+    FoundPage(prismicC getBookmark "mobile-download"): (doc, resolver) =>
+      html.mobileDownload(doc, resolver)
 
   def dailyPuzzleSlackApp = Open:
     pageHit
